@@ -1,0 +1,66 @@
+---
+import Icon from './Icon.astro';
+import Halftone from './Halftone.astro';
+import { site } from '../data/site';
+const { office, gym } = site.addresses;
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed&hl=cs`;
+const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapQuery)}`;
+---
+<section class="contact" id="kontakt">
+  <Halftone id="contact" class="halftone--contact" />
+  <div class="container contact-grid">
+    <div class="contact-main" data-reveal>
+      <h2>Pojďme <span class="accent">začít.</span></h2>
+      <a class="contact-phone" href={`tel:${site.phone}`}>{site.phoneDisplay}</a>
+      <p class="contact-lead">Zavolejte nebo napište. Krátce probereme, co vás trápí, a domluvíme první termín, obvykle do týdne.</p>
+      <ul class="contact-list">
+        <li>
+          <span class="contact-ico"><Icon name="phone" /></span>
+          <span><small>Telefon a WhatsApp</small><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></span>
+          <a class="contact-side-link" href={site.whatsapp} aria-label="Napsat na WhatsApp"><Icon name="wa" /></a>
+        </li>
+        <li>
+          <span class="contact-ico"><Icon name="mail" /></span>
+          <span><small>E-mail</small><a href={`mailto:${site.email}`}>{site.email}</a></span>
+        </li>
+        <li>
+          <span class="contact-ico"><Icon name="pin" /></span>
+          <span><small>{office.name} · {office.hours}</small><b>{office.street}, {office.city}</b></span>
+        </li>
+        <li>
+          <span class="contact-ico"><Icon name="gym" /></span>
+          <span><small>{gym.name} · {gym.hours}</small><b>{gym.street}, {gym.city}</b></span>
+        </li>
+      </ul>
+    </div>
+    <div class="contact-map" data-reveal>
+      <div class="map" id="map" data-src={mapSrc}>
+        <div class="map-placeholder">
+          <span class="map-pin"><Icon name="pin" /></span>
+          <b>{office.name}</b>
+          <span class="muted-on-dark">{office.street}, {office.city}</span>
+          <button class="btn btn--light" type="button" id="map-load"><Icon name="map" />Zobrazit mapu</button>
+          <small>Mapa se načte z Google Maps až po kliknutí. Google při tom může uložit cookies.</small>
+        </div>
+        <a class="map-open" href={mapLink} target="_blank" rel="noopener"><Icon name="map" />Otevřít v Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const map = document.getElementById('map');
+  const btn = document.getElementById('map-load');
+  btn?.addEventListener('click', () => {
+    if (!map || map.querySelector('iframe')) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = map.dataset.src ?? '';
+    iframe.title = 'Mapa, kde najdete ordinaci';
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    iframe.allowFullscreen = true;
+    map.querySelector('.map-placeholder')?.remove();
+    map.prepend(iframe);
+    map.classList.add('is-loaded');
+  });
+</script>

@@ -1,0 +1,15 @@
+---
+import { steps, stepsNote } from '../data/content';
+---
+<section id="probiha">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>Jak to <span class="accent">probíhá.</span></h2>
+      <p class="muted measure">Nejdřív pochopit, co se v těle děje. Potom cvičit.</p>
+    </div>
+    <div class="timeline" data-reveal>
+      {steps.map((s, i) => <div class="tl-step"><span class="tl-dot">{i + 1}</span><h3>{s.title}</h3><p>{s.text}</p></div>)}
+    </div>
+    <div class="tl-note" data-reveal>{stepsNote}</div>
+  </div>
+</section>

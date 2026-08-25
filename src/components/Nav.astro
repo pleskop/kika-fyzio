@@ -1,0 +1,29 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+const links = [
+  ['#sluzby', 'Služby'], ['#probiha', 'Jak to probíhá'], ['#omne', 'O mně'],
+  ['#galerie', 'Galerie'], ['#cenik', 'Ceník'], ['#kontakt', 'Kontakt'],
+];
+---
+<div class="nav-sentinel" aria-hidden="true"></div>
+<header class="nav" id="nav">
+  <div class="container">
+    <a class="brand" href="#uvod" aria-label="kika fyzio, úvod">kika&nbsp;<span class="accent">fyzio</span></a>
+    <nav class="nav-links" aria-label="Hlavní navigace">
+      {links.map(([href, label]) => <a href={href}>{label}</a>)}
+    </nav>
+    <a class="btn" href={`tel:${site.phone}`}><Icon name="phone" />Zavolat <span>{site.phoneDisplay}</span></a>
+  </div>
+</header>
+
+<script>
+  const nav = document.getElementById('nav');
+  const sentinel = document.querySelector('.nav-sentinel');
+  if (nav && sentinel && 'IntersectionObserver' in window) {
+    new IntersectionObserver(
+      (entries) => nav.classList.toggle('is-scrolled', !entries[0].isIntersecting),
+      { rootMargin: '-24px 0px 0px 0px' },
+    ).observe(sentinel);
+  }
+</script>

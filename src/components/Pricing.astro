@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+import { prices, pricingNote } from '../data/content';
+import { site } from '../data/site';
+---
+<section id="cenik">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>Bez pojišťovny, bez žádanky, <span class="accent">bez čekání.</span></h2>
+      <p class="muted measure">Pracuji bez smluv s pojišťovnami, takže se vám můžu věnovat celou hodinu. Doklad o platbě vystavím, řada zaměstnaneckých benefitů fyzioterapii proplácí.</p>
+    </div>
+    <div class="price-table" data-reveal>
+      {prices.map((p) => (
+        <div class:list={['price-row', { 'price-row--featured': p.featured, 'price-row--idea': p.idea }]}>
+          <div><h3>{p.title}</h3>{p.note && <small>{p.note}</small>}</div>
+          <div class="price-dur">{p.duration}</div>
+          <div class="price-amt">{p.amount}</div>
+        </div>
+      ))}
+    </div>
+    <div class="pricing-foot" data-reveal>
+      <p class="pricing-note">{pricingNote}</p>
+      <a class="btn" href={`tel:${site.phone}`}><Icon name="phone" />Zavolat a domluvit termín<span class="btn-ico"><Icon name="arrow" /></span></a>
+    </div>
+  </div>
+</section>

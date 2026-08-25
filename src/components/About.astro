@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import { bio, courses } from '../data/content';
+import { site } from '../data/site';
+import portrait from '../assets/photos/portrait.png';
+---
+<section class="about-section" id="omne">
+  <div class="container about">
+    <div class="about-photo" data-reveal>
+      <Image src={portrait} alt="Portrét fyzioterapeutky Kristíny Pleskové" widths={[640, 1024]} sizes="(max-width: 900px) 100vw, 520px" />
+    </div>
+    <div class="about-copy" data-reveal>
+      <h2>Ahoj, <span class="accent">jsem Kika.</span></h2>
+      <p class="about-role">{site.owner}, {site.role}</p>
+      {bio.map((p) => <p>{p}</p>)}
+      <p class="chips-label">Vzdělání a kurzy</p>
+      <div class="chips">
+        {courses.map((c) => <span class:list={['chip', { 'chip--edu': c.edu }]} title={c.full}>{c.label}</span>)}
+      </div>
+    </div>
+  </div>
+</section>

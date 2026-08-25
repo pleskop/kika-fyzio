@@ -1,0 +1,8 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+<div class="mobile-cta">
+  <a class="btn btn--accent" href={`tel:${site.phone}`}><Icon name="phone" />Zavolat</a>
+  <a class="btn btn--outline" href={site.whatsapp}><Icon name="wa" />WhatsApp</a>
+</div>

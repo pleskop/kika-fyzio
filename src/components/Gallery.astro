@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import rollerMat from '../assets/photos/roller-mat.png';
+import waitingRoom from '../assets/photos/waiting-room.png';
+import pelvisModel from '../assets/photos/pelvis-model.png';
+import backTherapy from '../assets/photos/back-therapy.png';
+import deskPoster from '../assets/photos/desk-poster.png';
+import laptop from '../assets/photos/laptop.png';
+import gymBall from '../assets/photos/gym-ball.png';
+import portraitDesk from '../assets/photos/portrait-desk.png';
+const more = [
+  { src: deskPoster, alt: 'Pracovní stůl v ordinaci s anatomickým plakátem', pos: '50% 40%' },
+  { src: laptop, alt: 'Kristína u počítače v ordinaci', pos: '50% 50%' },
+  { src: gymBall, alt: 'Cvičení s gymnastickým míčem', pos: '50% 40%' },
+  { src: portraitDesk, alt: 'Portrét Kristíny Pleskové', pos: '50% 25%' },
+];
+const sizes = '(max-width: 900px) 100vw, 640px';
+---
+<section id="galerie">
+  <div class="container">
+    <div class="gallery-head" data-reveal>
+      <div class="section-head" style="margin-bottom:0">
+        <h2>Praxe <span class="accent">a atmosféra.</span></h2>
+        <p class="muted measure">Klidná ordinace se dřevem a světlem, pomůcky, které opravdu používáme, a práce, která je vidět.</p>
+      </div>
+      <button class="btn btn--light" type="button" id="gallery-toggle" aria-expanded="false" aria-controls="gallery-more"><span class="label">Všechny fotky</span><span class="btn-ico"><Icon name="arrow" /></span></button>
+    </div>
+    <div class="gallery" data-reveal>
+      <div class="tile g-main"><Image src={rollerMat} alt="Kristína ukazuje cvik s pěnovým válcem na červené podložce" widths={[640, 1024]} sizes={sizes} style="object-position: 50% 45%" /></div>
+      <div class="g-side">
+        <div class="tile"><Image src={waitingRoom} alt="Čekárna s červenými křesly a parketami" widths={[480, 800]} sizes="(max-width: 900px) 50vw, 320px" style="object-position: 40% 50%" /></div>
+        <div class="tile"><Image src={pelvisModel} alt="Vysvětlení na modelu pánve" widths={[480, 800]} sizes="(max-width: 900px) 50vw, 320px" style="object-position: 50% 40%" /></div>
+      </div>
+      <div class="tile g-wide"><Image src={backTherapy} alt="Manuální terapie zad na lehátku" widths={[640, 1024]} sizes={sizes} style="object-position: 50% 55%" /></div>
+    </div>
+    <div class="gallery-more" id="gallery-more" data-reveal>
+      {more.map((m) => <div class="tile"><Image src={m.src} alt={m.alt} widths={[480, 800]} sizes="(max-width: 900px) 50vw, 320px" style={`object-position: ${m.pos}`} loading="lazy" /></div>)}
+    </div>
+  </div>
+</section>
+
+<script>
+  const toggle = document.getElementById('gallery-toggle');
+  const more = document.getElementById('gallery-more');
+  const label = toggle?.querySelector('.label');
+  toggle?.addEventListener('click', () => {
+    if (!more) return;
+    const open = more.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    if (label) label.textContent = open ? 'Méně fotek' : 'Všechny fotky';
+    if (open) more.classList.add('is-in');
+  });
+</script>

@@ -1,0 +1,18 @@
+---
+import { testimonials } from '../data/content';
+---
+<section id="reference">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>Co říkají <span class="accent">klientky.</span></h2>
+    </div>
+    <div class="quotes">
+      {testimonials.map((t) => (
+        <figure class="quote" data-reveal>
+          <blockquote class:list={{ placeholder: t.placeholder }}>„{t.quote}“</blockquote>
+          <figcaption><span class="avatar">{t.name[0]}</span><span><b>{t.name}</b>{t.context}</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

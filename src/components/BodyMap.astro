@@ -1,0 +1,51 @@
+---
+import { areas } from '../data/content';
+import Mannequin from './Mannequin.astro';
+---
+<section id="pomaham">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>Kde vás to bolí? <span class="accent">S&nbsp;tím vám pomůžu.</span></h2>
+      <p class="muted measure">Klikněte na místo na těle nebo na oblast v seznamu.</p>
+    </div>
+    <div class="bodymap" data-reveal>
+      <div class="figure">
+        <svg viewBox="0 0 200 480" role="img" aria-label="Dřevěná figurína s vyznačenými oblastmi terapie">
+          <Mannequin />
+          {areas.map((a, i) => (
+            <g class:list={['hotspot', { 'is-active': i === 0 }]} data-area={a.key} tabindex="0" role="button" aria-label={a.title}>
+              <circle class="pulse" cx={a.cx} cy={a.cy} r="10" /><circle class="ring" cx={a.cx} cy={a.cy} r="18" /><circle class="dot" cx={a.cx} cy={a.cy} r="6" />
+            </g>
+          ))}
+        </svg>
+      </div>
+      <div class="areas">
+        {areas.map((a, i) => (
+          <button class:list={['area', { 'is-active': i === 0 }]} data-area={a.key} type="button">
+            <span class="area-dot"></span>
+            <span><h3>{a.title}</h3><p>{a.text}</p></span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const spots = document.querySelectorAll<HTMLElement>('.hotspot');
+  const areaButtons = document.querySelectorAll<HTMLElement>('.area');
+  const activate = (key?: string) => {
+    spots.forEach((s) => s.classList.toggle('is-active', s.dataset.area === key));
+    areaButtons.forEach((a) => a.classList.toggle('is-active', a.dataset.area === key));
+  };
+  spots.forEach((s) => {
+    s.addEventListener('mouseenter', () => activate(s.dataset.area));
+    s.addEventListener('click', () => activate(s.dataset.area));
+    s.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(s.dataset.area); } });
+  });
+  areaButtons.forEach((a) => {
+    a.addEventListener('mouseenter', () => activate(a.dataset.area));
+    a.addEventListener('click', () => activate(a.dataset.area));
+    a.addEventListener('focus', () => activate(a.dataset.area));
+  });
+</script>

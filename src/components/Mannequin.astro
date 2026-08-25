@@ -1,0 +1,37 @@
+---
+// Wooden artist's mannequin, front view. viewBox 0 0 200 480. Slot for overlays (hotspots, tape).
+const W = { fill: 'url(#wood)', stroke: '#C7B08C', 'stroke-width': '0.8' };
+const J = { fill: 'url(#joint)' };
+interface Props { shadow?: boolean }
+const { shadow = true } = Astro.props;
+---
+          <defs>
+            <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F3E7D3" /><stop offset=".55" stop-color="#E8D6B8" /><stop offset="1" stop-color="#D2BA94" /></linearGradient>
+            <radialGradient id="joint" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#E9D9BC" /><stop offset="1" stop-color="#B89C74" /></radialGradient>
+            <g id="arm">
+              <rect {...W} x="-9" y="0" width="18" height="80" rx="9" transform="translate(62 96) rotate(7)" />
+              <circle {...J} cx="52.5" cy="176" r="7" />
+              <rect {...W} x="-8" y="0" width="16" height="74" rx="8" transform="translate(52.5 178) rotate(5)" />
+              <circle {...J} cx="46" cy="253" r="5" />
+              <path {...W} d="M46 256 C54 256 58 262 57 272 C56 282 51 286 45 286 C39 286 34 281 34 272 C34 262 38 256 46 256 Z" />
+            </g>
+            <g id="leg">
+              <rect {...W} x="70" y="240" width="24" height="92" rx="12" />
+              <circle {...J} cx="82" cy="337" r="7.5" />
+              <rect {...W} x="72" y="342" width="20" height="96" rx="10" />
+              <circle {...J} cx="82" cy="442" r="6" />
+              <path {...W} d="M70 446 L92 446 C98 446 101 452 99 458 C97 464 92 466 84 466 L66 466 C60 466 57 461 58 455 C59 449 64 446 70 446 Z" />
+            </g>
+          </defs>
+          {shadow && <ellipse cx="100" cy="470" rx="52" ry="5" fill="#E6E6E2" />}
+          <use href="#arm" /><use href="#arm" transform="matrix(-1 0 0 1 200 0)" />
+          <use href="#leg" /><use href="#leg" transform="matrix(-1 0 0 1 200 0)" />
+          <path {...W} d="M80 172 L120 172 C126 172 128 176 129 182 L134 222 C135 232 128 236 118 236 L104 236 L100 230 L96 236 L82 236 C72 236 65 232 66 222 L71 182 C72 176 74 172 80 172 Z" />
+          <circle {...J} cx="82" cy="238" r="8" /><circle {...J} cx="118" cy="238" r="8" />
+          <circle {...J} cx="100" cy="166" r="8" />
+          <path {...W} d="M70 84 L130 84 C138 84 142 90 141 98 L130 152 C129 160 124 164 116 164 L84 164 C76 164 71 160 70 152 L59 98 C58 90 62 84 70 84 Z" />
+          <circle {...J} cx="63" cy="94" r="9" /><circle {...J} cx="137" cy="94" r="9" />
+          <rect {...W} x="93" y="64" width="14" height="20" rx="6" />
+          <circle {...J} cx="100" cy="72" r="6" />
+          <path {...W} d="M100 12 C118 12 126 28 124 46 C122 60 112 68 100 68 C88 68 78 60 76 46 C74 28 82 12 100 12 Z" />
+<slot />

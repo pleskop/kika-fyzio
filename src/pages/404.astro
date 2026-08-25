@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import MobileCta from '../components/MobileCta.astro';
+import Mannequin from '../components/Mannequin.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+<Base title="Stránka nenalezena (404) | kika fyzio">
+  <Nav />
+  <main class="nf">
+    <div class="container nf-grid">
+      <div class="nf-copy" data-reveal>
+        <p class="nf-code">Chyba 404</p>
+        <h1>Tahle stránka si <span class="accent">natáhla sval.</span></h1>
+        <p class="lead">Adresa, kterou hledáte, tu není. Nic vážného, stačí klid, led a návrat na úvodní stránku. Kdyby to bolelo dál, zavolejte.</p>
+        <div class="hero-actions">
+          <a class="btn btn--accent" href="/">Zpět na úvod<span class="btn-ico"><Icon name="arrow" /></span></a>
+          <a class="btn btn--light" href={`tel:${site.phone}`}><Icon name="phone" />Zavolat</a>
+        </div>
+      </div>
+      <div class="nf-figure" data-reveal aria-hidden="true">
+        <svg viewBox="0 0 200 480" class="nf-mannequin">
+          <Mannequin shadow={false} />
+          <!-- kinesio tape on the knee -->
+          <g transform="rotate(-28 118 337)">
+            <rect x="96" y="331" width="44" height="12" rx="6" fill="#C8583F" opacity=".92" />
+            <rect x="99" y="334" width="38" height="6" rx="3" fill="#D97A63" opacity=".8" />
+          </g>
+          <g transform="rotate(32 118 337)">
+            <rect x="96" y="331" width="44" height="12" rx="6" fill="#C8583F" opacity=".92" />
+          </g>
+          <!-- little stars, it hurt a bit -->
+          <g fill="#C8583F">
+            <path d="M158 300l2.2 5 5 2.2-5 2.2-2.2 5-2.2-5-5-2.2 5-2.2z" />
+            <path d="M168 322l1.6 3.6 3.6 1.6-3.6 1.6-1.6 3.6-1.6-3.6-3.6-1.6 3.6-1.6z" opacity=".7" />
+          </g>
+        </svg>
+        <div class="nf-floor"></div>
+      </div>
+    </div>
+  </main>
+  <MobileCta />
+</Base>
+
+<style>
+  .nf { min-height: calc(100dvh - 88px); display: flex; align-items: center; padding-block: clamp(48px, 6vw, 96px); overflow: hidden; }
+  .nf-grid { display: grid; grid-template-columns: 6fr 6fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
+  .nf-copy { display: flex; flex-direction: column; gap: 22px; }
+  .nf-code { font-size: 13px; font-weight: 500; color: var(--accent); }
+  .nf-copy .lead { font-size: 1.15rem; max-width: 40ch; color: #444; }
+  .nf-figure { position: relative; height: 300px; }
+  .nf-mannequin { position: absolute; left: 50%; top: 50%; height: 180%; width: auto; transform: translate(-50%, -50%) rotate(90deg); transform-origin: center; }
+  .nf-floor { position: absolute; left: 6%; right: 6%; bottom: 8px; height: 10px; border-radius: 50%; background: rgba(0,0,0,.06); }
+  @media (max-width: 900px) {
+    .nf-grid { grid-template-columns: 1fr; }
+    .nf-figure { height: 220px; order: -1; }
+    .nf-mannequin { height: 190%; }
+  }
+</style>

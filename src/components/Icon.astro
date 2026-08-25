@@ -1,0 +1,14 @@
+---
+interface Props { name: 'phone' | 'wa' | 'mail' | 'arrow' | 'pin' | 'gym' | 'map'; }
+const { name } = Astro.props;
+const stroke = name === 'arrow' ? 1.8 : 1.6;
+---
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  {name === 'phone' && <path d="M5.6 2.3h1.9l1.3 3.1-1.6 1.1a8.5 8.5 0 0 0 4.3 4.3l1.1-1.6 3.1 1.3v1.9a1.4 1.4 0 0 1-1.5 1.4C7.6 13.4 2.6 8.4 2.2 3.8a1.4 1.4 0 0 1 1.4-1.5z" />}
+  {name === 'wa' && <><path d="M2.5 13.5l1-3.1A5.8 5.8 0 1 1 5.7 12.6z" /><path d="M6.2 6.3c.1 1.6 1.8 3.3 3.5 3.5l.8-.9-1.2-.6-.6.5c-.6-.3-1.2-.9-1.5-1.5l.5-.6-.6-1.2z" fill="currentColor" stroke="none" /></>}
+  {name === 'mail' && <><rect x="2" y="3.5" width="12" height="9" rx="2" /><path d="M2.5 4.5 8 8.6l5.5-4.1" /></>}
+  {name === 'arrow' && <path d="M3 8h9.5M8.5 4l4 4-4 4" />}
+  {name === 'pin' && <><path d="M8 14.5s4.5-4.2 4.5-7.5a4.5 4.5 0 1 0-9 0c0 3.3 4.5 7.5 4.5 7.5z" /><circle cx="8" cy="7" r="1.6" /></>}
+  {name === 'gym' && <><path d="M1.5 8h13M4 5v6M12 5v6M2.5 6.5v3M13.5 6.5v3" /></>}
+  {name === 'map' && <><path d="M1.5 4l4-1.5 5 1.5 4-1.5v10l-4 1.5-5-1.5-4 1.5z" /><path d="M5.5 2.5v10M10.5 4v10" /></>}
+</svg>

@@ -1,0 +1,14 @@
+---
+import { faq } from '../data/content';
+---
+<section id="faq">
+  <div class="container faq-grid">
+    <div data-reveal>
+      <h2>Časté <span class="accent">dotazy.</span></h2>
+      <p class="muted" style="margin-top:18px">Nenašli jste odpověď? Zavolejte, na telefonu jsem rychlejší než na e-mailu.</p>
+    </div>
+    <div class="faq" data-reveal>
+      {faq.map((f, i) => <details open={i === 0}><summary>{f.q}</summary><p>{f.a}</p></details>)}
+    </div>
+  </div>
+</section>

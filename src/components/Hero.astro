@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import Halftone from './Halftone.astro';
+import { site } from '../data/site';
+import heroPhoto from '../assets/photos/hero-hands.png';
+const proof = [
+  ['Mgr., FTVS UK', 'Univerzita Karlova v Praze'],
+  ['7 kurzů', 'DNS, Mojžíšová, skoliózy, tejpování'],
+  ['3 místa', 'ordinace, u vás doma, posilovna'],
+  ['Do týdne', 'obvyklá čekací doba na termín'],
+];
+---
+<section class="hero" id="uvod">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="hero-status">
+        {site.availabilityChip && <span class="chip-status"><span class="led"></span>{site.availabilityChip}</span>}
+        <span>Fyzioterapie · {site.city}</span>
+      </div>
+      <h1>Pohyb bez bolesti, <span class="accent">v&nbsp;Praze i&nbsp;u&nbsp;vás doma.</span></h1>
+      <p class="lead">Individuální terapie po úrazech, operacích a při chronických potížích. Celá hodina jen pro vás, bez čekárny a bez žádanky.</p>
+      <div class="hero-actions">
+        <a class="btn btn--accent" href={`tel:${site.phone}`}><Icon name="phone" />Zavolat</a>
+        <a class="btn btn--light" href={site.whatsapp}><Icon name="wa" />Napsat na WhatsApp</a>
+      </div>
+    </div>
+    <Halftone id="hero" class="halftone--hero" />
+    <div class="hero-photo">
+      <Image src={heroPhoto} alt="Fyzioterapeutka Kristína Plesková při manuální terapii zad" widths={[640, 1024, 1400]} sizes="(max-width: 900px) 100vw, 640px" loading="eager" fetchpriority="high" />
+      <a class="tile-label tile-label--accent" href="#sluzby">Nově také v posilovně</a>
+    </div>
+  </div>
+  <div class="proof">
+    <div class="container">
+      {proof.map(([b, s]) => <div class="proof-item"><b>{b}</b><span>{s}</span></div>)}
+    </div>
+  </div>
+</section>

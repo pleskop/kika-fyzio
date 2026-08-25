@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import { places } from '../data/content';
+import gym from '../assets/photos/gym-kettlebell.png';
+import office from '../assets/photos/office-shoulder.png';
+import home from '../assets/photos/home-table.png';
+const photos = [
+  { src: office, alt: 'Vyšetření ramene v ordinaci', pos: '50% 30%' },
+  { src: home, alt: 'Terapie klientky na lehátku', pos: '50% 40%' },
+  { src: gym, alt: 'Cvičení s kettlebellem v posilovně pod dohledem', pos: '50% 35%' },
+];
+---
+<section class="places-section" id="sluzby">
+  <div class="container">
+    <div class="places-head" data-reveal>
+      <h2>Terapie tam, <span class="accent">kde vám to dává smysl.</span></h2>
+      <p class="muted">Tři místa, jeden přístup: důkladná diagnostika, manuální terapie a cvičení, které zvládnete i sami.</p>
+    </div>
+    {places.map((p, i) => (
+      <div class="band" data-reveal>
+        <div class="band-text">
+          <span class="band-num" aria-hidden="true">{p.num}</span>
+          <h3>{p.title} {p.isNew && <span class="tag-new">Nově</span>}</h3>
+          <p>{p.text}</p>
+          <p class="band-meta">{p.meta}</p>
+        </div>
+        <div class:list={['band-photo', { 'band-photo--bw': p.bw }]}>
+          <Image src={photos[i].src} alt={photos[i].alt} widths={[640, 1024]} sizes="(max-width: 900px) 100vw, 600px" style={`object-position: ${photos[i].pos}`} />
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

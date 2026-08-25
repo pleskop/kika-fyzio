@@ -1,0 +1,20 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import MobileCta from '../components/MobileCta.astro';
+interface Props { title: string; updated?: string }
+const { title, updated } = Astro.props;
+---
+<Base title={`${title} | kika fyzio`}>
+  <Nav />
+  <main class="legal">
+    <div class="container legal-body">
+      <h1>{title}</h1>
+      {updated && <p class="muted">Poslední aktualizace: {updated}</p>}
+      <slot />
+    </div>
+  </main>
+  <Footer />
+  <MobileCta />
+</Base>

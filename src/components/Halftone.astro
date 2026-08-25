@@ -1,0 +1,12 @@
+---
+interface Props { id: string; class?: string; }
+const { id, class: cls } = Astro.props;
+---
+<svg class:list={['halftone', cls]} viewBox="0 0 560 560" aria-hidden="true">
+  <defs>
+    <pattern id={`dots-${id}`} width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.7" fill="currentColor" /></pattern>
+    <radialGradient id={`fade-${id}`}><stop offset="0" stop-color="#fff" /><stop offset="1" stop-color="#000" /></radialGradient>
+    <mask id={`mask-${id}`}><circle cx="280" cy="280" r="280" fill={`url(#fade-${id})`} /></mask>
+  </defs>
+  <rect width="560" height="560" fill={`url(#dots-${id})`} mask={`url(#mask-${id})`} />
+</svg>

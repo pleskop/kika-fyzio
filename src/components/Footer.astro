@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+const cols = [
+  { title: 'Praxe', links: [['#sluzby', 'Služby'], ['#pomaham', 'S čím pomůžu'], ['#probiha', 'Jak to probíhá'], ['#omne', 'O mně'], ['#galerie', 'Galerie'], ['#cenik', 'Ceník']] },
+  { title: 'Kontakt', links: [[`tel:${site.phone}`, site.phoneDisplay], [site.whatsapp, 'WhatsApp'], [`mailto:${site.email}`, site.email], ['#kontakt', 'Kde mě najdete']] },
+  { title: 'Právní', links: [['/ochrana-osobnich-udaju', 'Ochrana osobních údajů'], ['/obchodni-podminky', 'Obchodní podmínky'], ['/cookies', 'Cookies']] },
+];
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <b class="footer-brand">kika <span class="accent">fyzio</span></b>
+        <p>{site.owner}<br />{site.role}, {site.city}</p>
+      </div>
+      {cols.map((c) => (
+        <div class="footer-col">
+          <h4>{c.title}</h4>
+          <ul>{c.links.map(([href, label]) => <li><a href={href}>{label}</a></li>)}</ul>
+        </div>
+      ))}
+    </div>
+    <div class="footer-bar">
+      <span>© {year} {site.owner}</span>
+      <span>IČO {site.ico}</span>
+    </div>
+  </div>
+</footer>
